@@ -1,9 +1,30 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 
 function Home() {
     const [darkMode, setDarkMode] = useState(false);
     const navigate = useNavigate();
+
+    const sliderSettings = {
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      autoplay: true,
+      autoplaySpeed: 3000,
+      arrows: true,
+    };
+
+    const sliderImages = [
+      "22.jpg",
+      "3.jpg",
+      "1.jpg"
+    ];
+  
   
     return (
       <div className={`bg-gradient-to-b from-green-200 to-blue-300 h-screen flex flex-col ${darkMode ? "dark" : ""}`}>
@@ -15,7 +36,7 @@ function Home() {
             <h1 className="ml-2 text-lg font-bold text-yellow-600 dark:text-yellow-400">Life Orbit</h1>
           </div>
           {/* Search Bar */}
-          <div className="flex items-center w-3/5 bg-gray-100 px-4 py-2 rounded-full shadow-inner dark:bg-gray-700">
+          <div className="flex items-center w-3/5 bg-gray-100 px-4 py-1 m-0 rounded-full shadow-inner dark:bg-gray-700">
             <input
               type="text"
               placeholder="Search..."
@@ -30,7 +51,7 @@ function Home() {
           </div>
           {/* Controls */}
           <div className="flex items-center space-x-4">
-            <button className="p-2 text-gray-600 dark:text-gray-300">
+            <button className="p-1 hover:scale-110 hover:shadow-xl hover:rounded-full hover:shadow-blue-400/50 transition-all duration-300 ease-in-out">
               <img
                 src="translator-icon.png"
                 className="h-10 w-10"
@@ -46,7 +67,7 @@ function Home() {
                 onChange={() => setDarkMode(!darkMode)}
               />
               <div
-                className="w-12 h-6 rounded-full ring-0 peer duration-500 outline-none bg-gray-200 overflow-hidden 
+                className="w-12 h-6 rounded-full ring-0 peer duration-500 outline-none bg-gray-200 overflow-hidden hover:shadow-blue-400/50
                 before:flex before:items-center before:justify-center after:flex after:items-center after:justify-center 
                 before:content-['☀️'] before:absolute before:h-5 before:w-5 before:top-1/2 before:bg-white before:rounded-full 
                 before:left-1 before:-translate-y-1/2 before:transition-all before:duration-700 
@@ -61,35 +82,25 @@ function Home() {
         </header>
   
         {/* Main Content */}
-        <main className="flex-grow flex flex-col items-center justify-center text-center space-y-6 dark:bg-gray-700 dark:text-gray-200">
-          {/* Slider */}
-          <div className="w-full px-4 flex justify-between items-stretch space-x-2">
-            <button className="p-2 text-gray-700 bg-white rounded-full shadow dark:bg-gray-600 dark:text-gray-200">
-              ◀
-            </button>
-            <p className="text-gray-800 dark:text-gray-200">Slider on few tips or why is this app useful</p>
-            <button className="p-2 text-gray-700 bg-white rounded-full shadow dark:bg-gray-600 dark:text-gray-200">
-              ▶
-            </button>
-          </div>
-          {/* Dots */}
-          <div className="flex space-x-2">
-            <span className="w-3 h-3 bg-gray-400 rounded-full dark:bg-gray-500"></span>
-            <span className="w-3 h-3 bg-gray-400 rounded-full dark:bg-gray-500"></span>
-            <span className="w-3 h-3 bg-gray-400 rounded-full dark:bg-gray-500"></span>
-          </div>
-          {/* About Us */}
-          <p className="text-gray-700 dark:text-gray-200">About us</p>
-        </main>
+      <main className="flex-grow flex flex-col items-center justify-center text-center dark:bg-gray-700 dark:text-gray-200 m-0 p-0">
+        {/* Image Slider */}
+        <div className="w-[90%] ">
+          <Slider {...sliderSettings}>
+            {sliderImages.map((image, index) => (
+              <div key={index} className="w-full h-[300px]">
+                <img src={image} alt={`Slide ${index}`} className="w-full h-full object-cover rounded-lg shadow-lg" />
+              </div>
+            ))}
+          </Slider>
+        </div>
+      </main>
   
         {/* Bottom Navigation */}
-        <footer className="flex justify-around items-center bg-white mb-5 mr-20 ml-20 py-3 shadow rounded-full dark:bg-gray-800">
-          <Link to="/"
-          className="text-xl text-gray-700 dark:text-gray-300">
+        <footer className="fixed bottom-0 w-full flex justify-around items-center bg-white p-3 shadow rounded-t-2xl dark:bg-gray-800">
+          <Link to="/" className="text-xl text-gray-700 dark:text-gray-300">
             <img src="home_icon.ico" className="h-7 w-7" alt="Home" />
-        </Link>
-          <Link to="/categories"
-          className="text-xl text-gray-700 dark:text-gray-300">
+          </Link>
+          <Link to="/categories" className="text-xl text-gray-700 dark:text-gray-300">
             <img src="Search_icon.ico" className="h-7 w-7" alt="Search" />
           </Link>
           <button className="text-xl text-gray-700 dark:text-gray-300">
@@ -98,7 +109,8 @@ function Home() {
           <button className="text-xl text-gray-700 dark:text-gray-300">
             <img src="profile_icon.ico" className="h-8 w-8" alt="Profile" />
           </button>
-        </footer>
+      </footer>
+
       </div>
     );
   }
