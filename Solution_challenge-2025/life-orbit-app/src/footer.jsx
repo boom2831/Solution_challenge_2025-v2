@@ -4,7 +4,7 @@ const navItems = [
     { path: "/", icon: "home_icon.ico", alt: "Home" },
     { path: "/categories", icon: "Search_icon.ico", alt: "Search" },
     { path: "#", icon: "heart_icon.ico", alt: "Favorites" },
-    { path: "#", icon: "profile_icon.ico", alt: "Profile" },
+    { path: "/profile", icon: "profile_icon.ico", alt: "Profile" },
 ];
 
 function Footer() {

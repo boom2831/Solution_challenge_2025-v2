@@ -29,7 +29,7 @@ function Home() {
   
   
     return (
-      <div className={`bg-gradient-to-b from-green-200 to-blue-300 h-screen flex flex-col ${darkMode ? "dark" : ""}`}>
+      <div className={'bg-green-300 h-screen flex flex-col ${darkMode ? "dark" : ""}'}>
         {/* Top Navigation Bar */}
        <Header/>
   
