@@ -1,19 +1,10 @@
-import { useState, useEffect } from "react";
+// header.jsx
+import { useContext } from "react";
 import SearchBar from "./searchbar";
+import { DarkModeContext } from "./App";
 
 const Header = () => {
-  const [darkMode, setDarkMode] = useState(() => {
-    return localStorage.getItem("darkMode") === "true";
-  });
-
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-    localStorage.setItem("darkMode", darkMode);
-  }, [darkMode]);
+  const { darkMode, setDarkMode } = useContext(DarkModeContext);
 
   return (
     <header className="flex items-center justify-between px-4 py-2 bg-white shadow dark:bg-gray-800">
@@ -32,7 +23,7 @@ const Header = () => {
           <img src="translator-icon.png" className="h-10 w-10" alt="Translator" />
         </button>
 
-       {/* Dark Mode Toggle */}
+        {/* Dark Mode Toggle */}
         <label className="relative inline-flex items-center cursor-pointer">
             <input
             type="checkbox"

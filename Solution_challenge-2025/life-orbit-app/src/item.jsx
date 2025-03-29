@@ -28,7 +28,7 @@ function Item() {
   };
 
   return (
-    <div className="bg-purple-50 h-screen flex flex-col">
+    <div className={`min-h-screen flex flex-col ${darkMode ? "dark bg-gray-900" : "bg-purple-50"}`}>
       {/* Top Navigation Bar */}
       <Header />
 
@@ -42,7 +42,7 @@ function Item() {
       </div>
 
       {/* Main Content */}
-      <main className="flex-grow px-4 py-6 space-y-6">
+      <main className="flex-grow px-2 md:px-4 py-4 md:py-6 space-y-4 md:space-y-6">
         {/* Reading Content & YouTube Video */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="bg-white rounded-lg shadow p-6 text-center">

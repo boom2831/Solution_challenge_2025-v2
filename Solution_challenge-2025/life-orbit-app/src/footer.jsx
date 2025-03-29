@@ -1,4 +1,7 @@
+// footer.jsx
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { DarkModeContext } from "./App";
 
 const navItems = [
     { path: "/", icon: "home_icon.ico", alt: "Home" },
@@ -8,11 +11,21 @@ const navItems = [
 ];
 
 function Footer() {
+    const { darkMode } = useContext(DarkModeContext);
+
     return (
-        <footer className="fixed bottom-0 w-full flex justify-around items-center bg-white p-3 shadow rounded-t-2xl dark:bg-gray-800">
+        <footer className="w-full dark:bg-gray-800 py-2 shadow-lg fixed bottom-0 flex justify-around items-center bg-white p-2 rounded-t-2xl">
             {navItems.map((item, index) => (
-                <Link key={index} to={item.path} className="text-xl text-gray-700 dark:text-gray-300">
-                    <img src={item.icon} className="h-8 w-8" alt={item.alt} />
+                <Link 
+                    key={index} 
+                    to={item.path} 
+                    className={`p-1.5 rounded-full ${darkMode ? "hover:shadow-gray-600/30" : "hover:shadow-blue-400/30"} hover:shadow-md`}
+                >
+                    <img 
+                        src={item.icon} 
+                        className="h-5 w-5 md:h-6 md:w-6 hover:scale-110 transition-transform" 
+                        alt={item.alt} 
+                    />
                 </Link>
             ))}
         </footer>

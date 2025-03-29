@@ -9,9 +9,71 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease;
+}
+
+* {
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* Slider customizations */
+.slick-slider {
+  width: 100%;
+}
+
+.slick-list {
+  overflow: visible;
+  margin: 0 -10px;
+}
+
+.slick-slide > div {
+  padding: 0 10px;
+}
+
+.slick-dots {
+  position: absolute;
+  bottom: -25px; /* Adjust this value based on your footer height */
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  text-align: center;
+}
+
+.slick-dots li {
+  display: inline-block;
+  margin: 0 4px;
+}
+
+.slick-dots li button {
+  font-size: 0;
+  line-height: 0;
+  display: block;
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  cursor: pointer;
+  border: 0;
+  outline: none;
+  background: transparent;
+}
+
+.slick-dots li button:before {
+  content: '';
+  width: 10px;
+  height: 10px;
+  background: #ccc;
+  border-radius: 50%;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+}
+
+.slick-dots li.slick-active button:before {
+  background: #3b82f6;
+  opacity: 1;
 }

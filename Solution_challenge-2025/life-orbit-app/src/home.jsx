@@ -1,58 +1,56 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useRef } from "react";
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Footer from "./footer"
-import Header from "./header"
+import Header from "./header";
+import Footer from "./footer";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 function Home() {
-    const [darkMode, setDarkMode] = useState(false);
-    const navigate = useNavigate();
+  const sliderRef = useRef(null);
+  const sliderImages = ["2.jpg", "1.jpg", "3.jpg"];
 
-    const sliderSettings = {
-      dots: true,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      autoplay: true,
-      autoplaySpeed: 3000,
-      arrows: true,
-    };
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    arrows: true,
+    adaptiveHeight: true,
+    appendDots: dots => (
+      <div className="absolute bottom-20 w-full z-10">
+        <ul className="m-0 p-0 text-center">{dots}</ul>
+      </div>
+    ),
+    customPaging: i => (
+      <div className="w-2 h-2 rounded-full bg-blue-500 opacity-50 hover:opacity-100 transition-opacity"></div>
+    )
+  };
 
-    const sliderImages = [
-      "22.jpg",
-      "3.jpg",
-      "1.jpg"
-    ];
-  
-  
-    return (
-      <div className={'bg-green-300 h-screen flex flex-col ${darkMode ? "dark" : ""}'}>
-        {/* Top Navigation Bar */}
-       <Header/>
-  
-        {/* Main Content */}
-      <main className="flex-grow flex flex-col items-center justify-center text-center dark:bg-gray-700 dark:text-gray-200 m-0 p-0">
-        {/* Image Slider */}
-        <div className="w-[90%] ">
-          <Slider {...sliderSettings}>
-            {sliderImages.map((image, index) => (
-              <div key={index} className="w-full h-[300px]">
-                <img src={image} alt={`Slide ${index}`} className="w-full h-full object-cover rounded-lg shadow-lg" />
-              </div>
-            ))}
-          </Slider>
-        </div>
+  return (
+    <div className="relative flex flex-col min-h-screen overflow-hidden">
+      <Header />
+
+      <main className="flex-grow flex items-center justify-center pt-10 px-4 pb-4">
+      <div className="box">
+      <Carousel useKeyboardArrows={true}>
+        {sliderImages.map((URL, index) => (
+          <div className="slide">
+            <img alt="sample_file" src={URL} key={index} />
+          </div>
+        ))}
+      </Carousel>
+    </div>
       </main>
 
-      {/* Bottom Navigation */}
-      <Footer/>
-  
-      </div>
-    );
-  }
-  
-  export default Home;
-  
+      <Footer className="fixed bottom-0 w-full z-20" />
+    </div>
+  );
+}
+
+export default Home;
