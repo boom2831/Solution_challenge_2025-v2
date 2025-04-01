@@ -3,7 +3,7 @@ import Header from "./header";
 import Footer from "./footer";
 
 function Item() {
-  const [speed, setSpeed] = useState(1);
+  const [darkMode, setDarkMode] = useState(false);
   const [balance, setBalance] = useState(5000);
   const [pin, setPin] = useState("");
   const [amount, setAmount] = useState("");
