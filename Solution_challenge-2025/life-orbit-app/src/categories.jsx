@@ -1,12 +1,13 @@
 import { useState } from "react";
 import Header from "./header";
 import Footer from "./footer";
+import { Link } from "react-router-dom";
 
 function Categories() {
   // State for categories
   const [categories, setCategories] = useState([
-    { name: "Finance", colorFrom: "from-green-500", colorTo: "to-green-700" },
-    { name: "Health & Wellness", colorFrom: "from-blue-500", colorTo: "to-blue-700" },
+    { name: "Finance", colorFrom: "from-orange-300", colorTo: "to-orange-500", link: "/finance" },
+    { name: "Health & Wellness", colorFrom: "from-blue-300", colorTo: "to-blue-500", link: "/health" },
   ]);
 
   // Function for button click (does nothing for now)
@@ -15,7 +16,7 @@ function Categories() {
   };
 
   return (
-    <div className="bg-gradient-to-b from-blue-100 to-blue-300 min-h-screen flex flex-col">
+    <div className="bg-gradient-to-b from-white-100 to-white-300 min-h-screen flex flex-col">
       {/* Header (Fixed) */}
       <Header />
 
@@ -28,33 +29,27 @@ function Categories() {
             <div className="flex items-center space-x-4">
               <span className="text-lg font-bold text-gray-800">Categories</span>
             </div>
-            {/* Button that does nothing */}
-            <button 
-              className="bg-blue-600 text-white p-2 rounded-full shadow-md hover:bg-blue-700"
-              onClick={handleButtonClick}
-            >
-            </button>
+            
+            
           </div>
 
           {/* Grid Items - Render Only If Categories Exist */}
           {categories.length > 0 && (
             <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {categories.map((category, index) => (
+              <Link to={category.link} key={index} className="block"> 
                 <div
-                  key={index}
-                  className={`w-full h-32 bg-gradient-to-r ${category.colorFrom} ${category.colorTo} rounded-xl shadow-lg flex items-center justify-center text-white font-bold text-lg`}
+                  className={`w-full h-32 bg-gradient-to-r ${category.colorFrom} ${category.colorTo} rounded-xl shadow-lg flex items-center justify-center text-white font-bold text-lg cursor-pointer`}
                 >
                   {category.name}
                 </div>
-              ))}
+              </Link>
+            ))}
             </div>
           )}
         </div>
 
-        {/* Citations Section */}
-        <div className="bg-blue-100 p-6 mt-6 rounded-2xl shadow-md">
-          <span className="text-lg font-bold text-gray-800">Citations</span>
-        </div>
+        
       </main>
 
       {/* Footer */}

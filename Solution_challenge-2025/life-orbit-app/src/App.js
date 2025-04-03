@@ -7,6 +7,8 @@ import Item from "./item";
 import Profile from "./profile";
 import SignIn from './signin';
 import SignUp from './signup';
+import Health from "./health"; 
+import Finance from "./finance";
 
 export const DarkModeContext = React.createContext();
 
@@ -17,20 +19,23 @@ function App() {
 
   return (
 
-  <DarkModeContext.Provider value={{ darkMode, setDarkMode }}>
-    <div className={darkMode ? "dark" : ""}>
-      <Router>
+    <Router>
+    <DarkModeContext.Provider value={{ darkMode, setDarkMode }}>
+      <div className={darkMode ? "dark" : ""}>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/item" element={<Item />} />
+          <Route path="/item/:id?" element={<Item />} />  
           <Route path="/categories" element={<Categories />} />
-          <Route path="/item/:id" element={<Item />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/health" element={<Health />} />
+          <Route path="/finance" element={<Finance />} />
+          <Route path="/profile" element={<Profile/>} />
         </Routes>
-      </Router>
-    </div>
-  </DarkModeContext.Provider>
+      </div>
+    </DarkModeContext.Provider>
+  </Router>
+  
   );
 }
 
