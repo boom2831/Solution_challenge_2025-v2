@@ -1,5 +1,5 @@
 // App.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Categories from "./pages/categories";
 import Home from "./pages/home";
@@ -13,11 +13,35 @@ import Finance from "./pages/finance";
 
 export const DarkModeContext = React.createContext();
 
+// Custom hook to detect translation bar
+function useTranslateBarOffset() {
+  const [translateBarVisible, setTranslateBarVisible] = useState(false);
+
+  useEffect(() => {
+    const checkTranslateBar = () => {
+      const banner = document.querySelector("#goog-gt-tt") || document.querySelector(".goog-te-banner-frame");
+      setTranslateBarVisible(!!banner);
+    };
+
+    // Check once on mount
+    checkTranslateBar();
+
+    // Mutation observer for dynamic changes
+    const observer = new MutationObserver(checkTranslateBar);
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    return () => observer.disconnect();
+  }, []);
+
+  return translateBarVisible;
+}
+
 function App() {
   const [darkMode, setDarkMode] = useState(() => {
     return localStorage.getItem("darkMode") === "true";
   });
 
+HEAD
   return (
 <FirebaseProvider>
   <DarkModeContext.Provider value={{ darkMode, setDarkMode }}>
@@ -39,6 +63,8 @@ function App() {
     </div>
   </DarkModeContext.Provider>
   </FirebaseProvider>
+
+
   );
 }
 
