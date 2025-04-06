@@ -4,20 +4,17 @@ import Footer from "./footer";
 import { Link } from "react-router-dom";
 
 function Categories() {
-  // State for categories
   const [categories, setCategories] = useState([
     { name: "Finance", colorFrom: "from-cyan-300", colorTo: "to-cyan-500", link: "/finance" },
     { name: "Security", colorFrom: "from-emerald-300", colorTo: "to-emerald-500", link: "/health"}
   ]);
 
-  // Function for button click (does nothing for now)
   const handleButtonClick = () => {
-    console.log("Button clicked!"); // You can add functionality later
+    console.log("Button clicked!"); 
   };
 
   return (
     <div className="bg-gradient-to-b from-white-100 to-white-300 min-h-screen flex flex-col">
-      {/* Header (Fixed) */}
       <Header />
 
       {/* Main Content Wrapper */}
@@ -33,7 +30,7 @@ function Categories() {
             
           </div>
 
-          {/* Grid Items - Render Only If Categories Exist */}
+          {/* Grid Items */}
           {categories.length > 0 && (
             <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {categories.map((category, index) => (

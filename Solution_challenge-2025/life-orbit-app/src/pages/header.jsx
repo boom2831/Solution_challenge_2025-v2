@@ -1,7 +1,7 @@
 // header.jsx
 import { useContext } from "react";
 import SearchBar from "./searchbar";
-import { DarkModeContext } from "./App";
+import { DarkModeContext } from "../App";
 
 const Header = () => {
   const { darkMode, setDarkMode } = useContext(DarkModeContext);

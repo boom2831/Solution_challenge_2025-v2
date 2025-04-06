@@ -35,15 +35,15 @@ function Home() {
       <Header />
 
       <main className="flex-grow flex items-center justify-center pt-10 px-4 pb-4">
-      <div className="box">
-      <Carousel useKeyboardArrows={true}>
-        {sliderImages.map((URL, index) => (
-          <div className="slide">
-            <img alt="sample_file" src={URL} key={index} />
-          </div>
-        ))}
-      </Carousel>
-    </div>
+        <div className="box">
+          <Carousel useKeyboardArrows={true}>
+            {sliderImages.map((URL, index) => (
+              <div className="slide" key={index}>
+                <img alt={`slide-${index}`} src={URL} />
+              </div>
+            ))}
+          </Carousel>
+        </div>
       </main>
 
       <Footer className="fixed bottom-0 w-full z-20" />
@@ -52,3 +52,4 @@ function Home() {
 }
 
 export default Home;
+

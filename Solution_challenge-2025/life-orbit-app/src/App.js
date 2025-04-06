@@ -1,14 +1,15 @@
 // App.js
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Categories from "./categories";
-import Home from "./home";
-import Item from "./item";
-import Profile from "./profile";
-import SignIn from './signin';
-import SignUp from './signup';
-import Health from "./health"; 
-import Finance from "./finance";
+import Categories from "./pages/categories";
+import Home from "./pages/home";
+import ChequeSimulation from "./pages/item";
+import Profile from "./pages/profile";
+import SignIn from './pages/signin';
+import SignUp from './pages/signup';
+import {FirebaseProvider} from './Context/firebase'
+import Health from "./pages/health"; 
+import Finance from "./pages/finance";
 
 export const DarkModeContext = React.createContext();
 
@@ -18,24 +19,26 @@ function App() {
   });
 
   return (
-
-    <Router>
-    <DarkModeContext.Provider value={{ darkMode, setDarkMode }}>
-      <div className={darkMode ? "dark" : ""}>
+<FirebaseProvider>
+  <DarkModeContext.Provider value={{ darkMode, setDarkMode }}>
+    <div className={darkMode ? "dark" : "light"}>
+      <Router>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/item/:id?" element={<Item />} />  
+          <Route path="/" element={<SignIn />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/item" element={<ChequeSimulation />} />
           <Route path="/categories" element={<Categories />} />
           <Route path="/signin" element={<SignIn />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/health" element={<Health />} />
           <Route path="/finance" element={<Finance />} />
           <Route path="/profile" element={<Profile/>} />
         </Routes>
-      </div>
-    </DarkModeContext.Provider>
-  </Router>
-  
+      </Router>
+    </div>
+  </DarkModeContext.Provider>
+  </FirebaseProvider>
   );
 }
 
