@@ -77,3 +77,23 @@ code {
   background: #3b82f6;
   opacity: 1;
 }
+
+/* Hide top bar and branding */
+.goog-te-banner-frame.skiptranslate,
+.goog-logo-link,
+.goog-te-gadget span {
+  display: none !important;
+}
+
+body {
+  top: 0px !important;
+}
+
+#google_translate_element {
+  display: none;
+}
+
+body:has(#goog-gt-tt),
+body:has(#google_translate_element) {
+  margin-top: 40px;
+}

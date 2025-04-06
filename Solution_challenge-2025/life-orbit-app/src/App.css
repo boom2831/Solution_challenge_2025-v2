@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+
+/* Hide Google Translate UI */
+.goog-logo-link,
+.goog-te-gadget span,
+.goog-te-banner-frame,
+.goog-te-menu-frame,
+#goog-gt-tt {
+  display: none !important;
+}
+body {
+  top: 0 !important;
+}
