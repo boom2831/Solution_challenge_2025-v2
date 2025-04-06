@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { createContext, useContext } from 'react';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from 'firebase/auth';
-import { getDatabase, set, ref, get } from 'firebase/database';
+import { getDatabase, set, ref, get, onValue } from 'firebase/database';
 
 const firebaseContext = createContext(null);
 
@@ -87,6 +87,31 @@ export const FirebaseProvider = ({children}) => {
   const getCurrentUser = (callback) => {
     return onAuthStateChanged(FirebaseAuth, callback);
   };
+
+  const updateUserLikedCourses = async (userId, courseId, isLiked) => {
+    try {
+      const courseRef = ref(database, `liked_courses/${userId}/${courseId}`);
+      if (isLiked) {
+        await set(courseRef, true);
+      } else {
+        await set(courseRef, null); 
+      }
+    } catch (error) {
+      throw error;
+    }
+  };
+
+
+  const getUserLikedCourses = (userId) => {
+    return new Promise((resolve, reject) => {
+      const coursesRef = ref(database, `liked_courses/${userId}`);
+      onValue(coursesRef, (snapshot) => {
+        resolve(snapshot.exists() ? snapshot.val() : {});
+      }, (error) => {
+        reject(error);
+      });
+    });
+  };
   
 
   return (
@@ -94,7 +119,9 @@ export const FirebaseProvider = ({children}) => {
       signinUserWithEmailAndPassword, 
       signupUserWithEmailAndPassword,
       signinWithGoogle,
-      getCurrentUser
+      getCurrentUser,
+      updateUserLikedCourses,
+      getUserLikedCourses
       }}>
       {children}
     </firebaseContext.Provider>

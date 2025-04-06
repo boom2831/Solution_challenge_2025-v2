@@ -1,14 +1,16 @@
-import { useRef } from "react";
+import { useRef, useContext } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Header from "./header";
 import Footer from "./footer";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { DarkModeContext } from "../App";
 
 function Home() {
   const sliderRef = useRef(null);
   const sliderImages = ["2.jpg", "1.jpg", "3.jpg"];
+  const { darkMode } = useContext(DarkModeContext);
 
   const sliderSettings = {
     dots: true,
@@ -31,7 +33,7 @@ function Home() {
   };
 
   return (
-    <div className="relative flex flex-col min-h-screen overflow-hidden">
+    <div className={`relative flex flex-col min-h-screen overflow-hidden ${darkMode ? "bg-black text-white" : "bg-white text-black"}`}>
       <Header />
 
       <main className="flex-grow flex items-center justify-center pt-10 px-4 pb-4">
@@ -52,4 +54,5 @@ function Home() {
 }
 
 export default Home;
+
 
